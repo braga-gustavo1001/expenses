@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
-class TransactionForm extends StatelessWidget {
-  final titleController = TextEditingController();
-  final valueController = TextEditingController();
-
+class TransactionForm extends StatefulWidget {
   final void Function(String, double) onSubmit;
 
   TransactionForm(this.onSubmit);
+
+  @override
+  State<TransactionForm> createState() => _TransactionFormState();
+}
+
+class _TransactionFormState extends State<TransactionForm> {
+  final titleController = TextEditingController();
+
+  final valueController = TextEditingController();
 
   _submitForm() {
     final title = titleController.text;
@@ -16,40 +22,37 @@ class TransactionForm extends StatelessWidget {
       return;
     }
 
-    onSubmit(title, value);
+    widget.onSubmit(title, value);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: InputDecoration(labelText: 'Título'),
-              onSubmitted: (_) => _submitForm(),
-            ),
-            TextField(
-              controller: valueController,
-              keyboardType: TextInputType.numberWithOptions(signed: true),
-              decoration: InputDecoration(labelText: 'Valor (R\$)'),
-              onSubmitted: (_) => _submitForm(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  style: TextButton.styleFrom(foregroundColor: Colors.purple),
-                  child: Text('Nova transação'),
-                  onPressed: _submitForm,
-                ),
-              ],
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 16),
+      child: Column(
+        children: [
+          TextField(
+            controller: titleController,
+            decoration: InputDecoration(labelText: 'Título'),
+            onSubmitted: (_) => _submitForm(),
+          ),
+          TextField(
+            controller: valueController,
+            keyboardType: TextInputType.numberWithOptions(signed: true),
+            decoration: InputDecoration(labelText: 'Valor (R\$)'),
+            onSubmitted: (_) => _submitForm(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(foregroundColor: Colors.purple),
+                child: Text('Nova transação'),
+                onPressed: _submitForm,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
