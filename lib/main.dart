@@ -21,15 +21,28 @@ class ExpensesApp extends StatelessWidget {
       home: MyHomePage(),
       theme: ThemeData(
         useMaterial3: false,
+        textTheme: ThemeData.light().textTheme.copyWith(
+          titleMedium: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.green,
           foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.green,
           primary: Colors.green,
           secondary: Colors.purple,
         ),
+        fontFamily: 'Quicksand',
       ),
     );
   }
@@ -41,19 +54,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _transactions = [
-    Transaction(
-      id: '1',
-      title: 'Jogo Palmeiras',
-      value: 150.00,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Conta Vivo',
-      value: 168.99,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //   id: '1',
+    //   title: 'Jogo Palmeiras',
+    //   value: 150.00,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '2',
+    //   title: 'Conta Vivo',
+    //   value: 168.99,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   _addTransction(String title, double value) {
@@ -93,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
+        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
